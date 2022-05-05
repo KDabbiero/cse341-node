@@ -1,9 +1,11 @@
 const express = require("express");
+const connectDB = require('./db/connection');
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use('/', require('./routes'))
+connectDB();
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+app.use(express.json({extended:false}));
+app.use('/api/contactModel', require('./api/user'))
+const Port = process.env.Port || 3000;
+
+app.listen(Port, () => console.log('Server started'));

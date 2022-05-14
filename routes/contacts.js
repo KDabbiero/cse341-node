@@ -1,27 +1,18 @@
 'use strict';
 
 const { append } = require('express/lib/response');
-
+const { create_a_contact, list_all_contacts } = require('../api/user');
+const Post = require('../db/user')
 
 var mongoose = require('mongoose'),
   Contact = mongoose.model('Contacts');
 
-list_all_tasks = function(req, res) {
-  Contact.find({}, function(err, task) {
+list_all_contacts = function(req, res) {
+  Contact.find({}, function(err, contact) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(contact);
   });
 };
 
-module.exports = function(app) {
-
-  
-    // todoList Routes
-    app.route('/contacts')
-      .get(list_all_tasks);
-  
-  
-    app.route('/contacts/:contactId')
-      .get(read_a_task);
-};
+create_a_contact();
